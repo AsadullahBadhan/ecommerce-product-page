@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Kumbh Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  border: none;
+  background: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+nav .user-info, nav .nav-items, nav .nav-logo, nav {
+  display: flex;
+  align-items: center;
+}
+
+nav {
+  padding: 0.8rem 5%;
+  justify-content: space-between;
+  position: relative;
+}
+nav .logo {
+  margin-left: 0;
+}
+nav .nav-items .nav-item {
+  color: hsl(219, 9%, 45%);
+  align-self: center;
+  margin-left: 2rem;
+}
+nav .user-info .user-avatar {
+  width: 2rem;
+  margin-left: 1.5rem;
+}
+
+.hamburger,
+.close-menu-btn {
+  display: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  nav .logo {
+    margin-left: 1rem;
+  }
+  nav .nav-menu {
+    position: absolute;
+    background-color: hsl(0, 0%, 100%);
+    padding: 2rem 8rem 0 1.5rem;
+    height: 100vh;
+    top: 0;
+    left: -100%;
+    transition: left 0.5s;
+  }
+  nav .nav-menu .nav-items {
+    display: block;
+    margin-top: 2rem;
+    margin-left: 0;
+  }
+  nav .nav-menu .nav-items .nav-item {
+    margin-bottom: 1rem;
+    margin-left: 0;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  nav .nav-menu .nav-items .nav-item:hover {
+    color: hsl(26, 100%, 50%);
+  }
+  nav .nav-menu.active {
+    left: 0;
+  }
+  nav .hamburger,
+  nav .close-menu-btn {
+    display: block;
+  }
+}
