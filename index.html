@@ -14,7 +14,7 @@
 		<link rel="stylesheet" href="/css/index.css" />
 	</head>
 	<body>
-		<header>
+		<header class="container">
 			<nav>
 				<div class="nav-logo">
 					<span class="hamburger">
@@ -38,13 +38,61 @@
 				</div>
 
 				<div class="user-info">
-					<img src="/images/icon-cart.svg" alt="cart" />
+					<img class="cart" src="/images/icon-cart.svg" alt="cart" />
 					<img class="user-avatar" src="/images/image-avatar.png" alt="" />
 				</div>
 			</nav>
 		</header>
 
-		<!-- Collections Men Women About Contact Sneaker Company Fall Limited Edition Sneakers These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer. $125.00 50% $250.00 0 Add to cart -->
+		<main>
+			<div class="container product">
+				<!-- product image section -->
+				<section class="product-images">
+					<div class="product-img">
+						<img src="/images/image-product-1.jpg" alt="" />
+					</div>
+					<div class="row">
+						<div class="column">
+							<img src="/images/image-product-1-thumbnail.jpg" onclick="openModal();currentSlide(1)" class="product-img-thumbnail" />
+						</div>
+						<div class="column">
+							<img src="/images/image-product-2-thumbnail.jpg" onclick="openModal();currentSlide(2)" class="product-img-thumbnail active" />
+						</div>
+						<div class="column">
+							<img src="/images/image-product-3-thumbnail.jpg" onclick="openModal();currentSlide(3)" class="product-img-thumbnail" />
+						</div>
+						<div class="column">
+							<img src="/images/image-product-4-thumbnail.jpg" onclick="openModal();currentSlide(4)" class="product-img-thumbnail" />
+						</div>
+					</div>
+				</section>
+				<!-- product description section -->
+				<section class="product-info">
+					<p class="company">Sneaker Company</p>
+					<h1 class="product-name">Fall Limited Edition Sneakers</h1>
+					<p class="product-description">These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.</p>
+					<p class="price">$125.00</p>
+					<p class="price-muted">$250.00</p>
+					<div class="add-to-cart">
+						<div class="item-number">
+							<button class="decrease-count">
+								<img src="/images/icon-minus.svg" alt="" />
+							</button>
+							<span class="product-count">0</span>
+							<button class="increas-count">
+								<img src="/images/icon-plus.svg" alt="" />
+							</button>
+						</div>
+
+						<button class="add-to-cart-btn">
+							<img src="/images/icon-cart.svg" alt="" />
+							<span>Add to cart</span>
+						</button>
+					</div>
+				</section>
+			</div>
+		</main>
+
 		<script src="/app.js"></script>
 	</body>
 </html>
