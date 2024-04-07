@@ -30,7 +30,8 @@ li {
   list-style: none;
 }
 
-.product-info .add-to-cart .add-to-cart-btn, .product-info .add-to-cart .item-number, .product-info .add-to-cart, .product-images .row, .product-images, .product, nav .user-info, nav .nav-items, nav .nav-logo, nav {
+.product-info .add-to-cart .add-to-cart-btn, .product-info .add-to-cart .item-number, .product-info .add-to-cart, .prev,
+.next, .row, .product-images, .product, nav .user-info, nav .nav-items, nav .nav-logo, nav {
   display: flex;
   align-items: center;
 }
@@ -38,11 +39,13 @@ li {
 .container {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 2rem;
 }
 
 nav {
   justify-content: space-between;
   position: relative;
+  padding-inline: 1rem;
   border-bottom: 1px solid hsl(220, 14%, 75%);
 }
 nav .logo {
@@ -63,6 +66,14 @@ nav .user-info .user-avatar {
   width: 3rem;
   margin-left: 3rem;
 }
+nav .user-info .user-avatar:hover {
+  outline: 2px solid hsl(26, 100%, 50%);
+  border-radius: 50%;
+}
+
+.cursor {
+  cursor: pointer;
+}
 
 .hamburger,
 .close-menu-btn {
@@ -71,6 +82,10 @@ nav .user-info .user-avatar {
 }
 
 @media screen and (max-width: 768px) {
+  nav {
+    padding-block: 1rem;
+    border: none;
+  }
   nav .logo {
     margin-left: 1rem;
   }
@@ -116,27 +131,113 @@ nav .user-info .user-avatar {
 .product-images {
   flex-direction: column;
 }
+.product-images .prev,
+.product-images .next {
+  display: none;
+  top: 40%;
+}
+.product-images .prev {
+  left: 1.5rem;
+}
+.product-images .next {
+  right: 1.5rem;
+}
 .product-images .product-img img {
   width: 30rem;
   border-radius: 1.5rem;
 }
-.product-images .row {
+
+.row {
   margin-top: 2rem;
 }
-.product-images .row .column {
+.row .column {
   padding-inline: 0.7rem;
 }
-.product-images .row .column .product-img-thumbnail {
+.row .column .product-img-thumbnail {
   width: 6.5rem;
   border-radius: 0.5rem;
   cursor: pointer;
 }
-.product-images .row .column .product-img-thumbnail:hover {
-  opacity: 0.5;
+.row .column .product-img-thumbnail:hover {
+  opacity: 50%;
 }
-.product-images .row .column .product-img-thumbnail.active {
-  border: 2px solid hsl(26, 100%, 50%);
-  opacity: 0.5;
+
+.lightbox-container {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.lightbox-container .modal-content {
+  position: relative;
+  margin: auto;
+  padding: 0;
+  width: 30rem;
+}
+.lightbox-container .modal-content img {
+  border-radius: 1rem;
+  width: 100%;
+}
+
+/* The Close Button */
+.close {
+  color: hsl(0, 0%, 100%);
+  position: absolute;
+  top: 5%;
+  right: 35%;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: hsl(26, 100%, 50%);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.mySlides {
+  display: none;
+}
+
+/* Next & previous buttons */
+.lightbox-image {
+  position: relative;
+}
+
+.prev,
+.next {
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  width: 3rem;
+  height: 3rem;
+  padding: 1rem;
+  background-color: white;
+  color: hsl(220, 13%, 13%);
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: 0.6s ease;
+  border-radius: 50%;
+}
+
+.prev {
+  left: -1.5rem;
+}
+
+.next {
+  right: -1.5rem;
+}
+
+.prev:hover,
+.next:hover {
+  color: hsl(26, 100%, 50%);
 }
 
 .product-info .company {
@@ -153,11 +254,14 @@ nav .user-info .user-avatar {
   color: hsl(219, 9%, 45%);
   margin-block: 1rem;
 }
-.product-info .price {
+.product-info .price-container {
+  margin-block: 2rem;
+}
+.product-info .price-container .price {
   font-size: 1.5rem;
   font-weight: 700;
 }
-.product-info .price::after {
+.product-info .price-container .price::after {
   content: "50%";
   color: hsl(26, 100%, 50%);
   font-size: 0.8rem;
@@ -165,7 +269,7 @@ nav .user-info .user-avatar {
   padding: 3px 5px;
   margin-left: 1rem;
 }
-.product-info .price-muted {
+.product-info .price-container .price-muted {
   font-size: 1rem;
   font-weight: 700;
   color: hsl(220, 14%, 75%);
@@ -198,4 +302,50 @@ nav .user-info .user-avatar {
 }
 .product-info .add-to-cart .add-to-cart-btn img {
   width: 1rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0;
+  }
+  .product {
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 0;
+  }
+  .product > * {
+    padding-inline: 0;
+  }
+  .product img {
+    border-radius: 0 !important;
+  }
+  .product-images .prev,
+  .product-images .next {
+    display: flex;
+  }
+  .row {
+    display: none;
+  }
+  .product-info {
+    padding-inline: 2rem;
+  }
+  .product-info .product-name {
+    font-size: 2rem;
+  }
+  .product-info .price-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .product-info .add-to-cart {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .product-info .add-to-cart .item-number {
+    width: 100%;
+  }
+  .product-info .add-to-cart .add-to-cart-btn {
+    margin-block: 1rem;
+    margin-left: 0;
+  }
 }

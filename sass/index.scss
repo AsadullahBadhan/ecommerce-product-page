@@ -41,6 +41,7 @@ li {
 .container {
 	max-width: 1200px;
 	margin: 0 auto;
+	padding: 0 2rem;
 }
 
 // top nav
@@ -48,6 +49,7 @@ nav {
 	@extend %flex-box;
 	justify-content: space-between;
 	position: relative;
+	padding-inline: 1rem;
 	border-bottom: 1px solid $clr-grayish-blue;
 
 	.nav-logo {
@@ -81,8 +83,17 @@ nav {
 		.user-avatar {
 			width: 3rem;
 			margin-left: 3rem;
+
+			&:hover {
+				outline: 2px solid $clr-orange;
+				border-radius: 50%;
+			}
 		}
 	}
+}
+
+.cursor {
+	cursor: pointer;
 }
 
 .hamburger,
@@ -91,8 +102,12 @@ nav {
 	cursor: pointer;
 }
 
+//mobile devices
 @media screen and (max-width: 768px) {
 	nav {
+		padding-block: 1rem;
+		border: none;
+
 		.logo {
 			margin-left: 1rem;
 		}
@@ -149,34 +164,123 @@ nav {
 	@extend %flex-box;
 	flex-direction: column;
 
+	.prev,
+	.next {
+		display: none;
+		top: 40%;
+	}
+
+	.prev {
+		left: 1.5rem;
+	}
+
+	.next {
+		right: 1.5rem;
+	}
+
 	.product-img img {
 		width: 30rem;
 		border-radius: 1.5rem;
 	}
+}
 
-	.row {
-		@extend %flex-box;
-		margin-top: 2rem;
+.row {
+	@extend %flex-box;
+	margin-top: 2rem;
 
-		.column {
-			padding-inline: 0.7rem;
+	.column {
+		padding-inline: 0.7rem;
 
-			.product-img-thumbnail {
-				width: 6.5rem;
-				border-radius: 0.5rem;
-				cursor: pointer;
+		.product-img-thumbnail {
+			width: 6.5rem;
+			border-radius: 0.5rem;
+			cursor: pointer;
 
-				&:hover {
-					opacity: 0.5;
-				}
-
-				&.active {
-					border: 2px solid $clr-orange;
-					opacity: 0.5;
-				}
+			&:hover {
+				opacity: 50%;
 			}
 		}
 	}
+}
+
+.lightbox-container {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	padding-top: 100px;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.8);
+
+	.modal-content {
+		position: relative;
+		margin: auto;
+		padding: 0;
+		width: 30rem;
+
+		img {
+			border-radius: 1rem;
+			width: 100%;
+		}
+	}
+}
+
+/* The Close Button */
+.close {
+	color: $clr-white;
+	position: absolute;
+	top: 5%;
+	right: 35%;
+	font-size: 3rem;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: $clr-orange;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.mySlides {
+	display: none;
+}
+
+/* Next & previous buttons */
+.lightbox-image {
+	position: relative;
+}
+.prev,
+.next {
+	@extend %flex-box;
+	justify-content: center;
+	position: absolute;
+	top: 50%;
+	width: $arrow-size;
+	height: $arrow-size;
+	padding: 1rem;
+	background-color: white;
+	color: $clr-dark-blue;
+	font-weight: bold;
+	font-size: 1.2rem;
+	transition: 0.6s ease;
+	border-radius: 50%;
+}
+
+.prev {
+	left: calc($arrow-size / -2);
+}
+
+.next {
+	right: calc($arrow-size / -2);
+}
+
+.prev:hover,
+.next:hover {
+	color: $clr-orange;
 }
 
 .product-info {
@@ -197,25 +301,29 @@ nav {
 		margin-block: 1rem;
 	}
 
-	.price {
-		font-size: 1.5rem;
-		font-weight: $fw-bold;
+	.price-container {
+		margin-block: 2rem;
 
-		&::after {
-			content: "50%";
-			color: $clr-orange;
-			font-size: 0.8rem;
-			background-color: $clr-pale-orange;
-			padding: 3px 5px;
-			margin-left: 1rem;
+		.price {
+			font-size: 1.5rem;
+			font-weight: $fw-bold;
+
+			&::after {
+				content: "50%";
+				color: $clr-orange;
+				font-size: 0.8rem;
+				background-color: $clr-pale-orange;
+				padding: 3px 5px;
+				margin-left: 1rem;
+			}
 		}
-	}
 
-	.price-muted {
-		font-size: 1rem;
-		font-weight: $fw-bold;
-		color: $clr-grayish-blue;
-		text-decoration: line-through;
+		.price-muted {
+			font-size: 1rem;
+			font-weight: $fw-bold;
+			color: $clr-grayish-blue;
+			text-decoration: line-through;
+		}
 	}
 
 	.add-to-cart {
@@ -251,6 +359,65 @@ nav {
 
 			img {
 				width: 1rem;
+			}
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.container {
+		padding: 0;
+	}
+
+	.product {
+		flex-direction: column;
+		gap: 2rem;
+		margin-top: 0;
+
+		& > * {
+			padding-inline: 0;
+		}
+
+		img {
+			border-radius: 0 !important;
+		}
+	}
+
+	.product-images {
+		.prev,
+		.next {
+			display: flex;
+		}
+	}
+
+	.row {
+		display: none;
+	}
+
+	.product-info {
+		padding-inline: 2rem;
+
+		.product-name {
+			font-size: 2rem;
+		}
+
+		.price-container {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.add-to-cart {
+			flex-direction: column;
+			align-items: stretch;
+
+			.item-number {
+				width: 100%;
+			}
+
+			.add-to-cart-btn {
+				margin-block: 1rem;
+				margin-left: 0;
 			}
 		}
 	}

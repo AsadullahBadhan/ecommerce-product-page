@@ -38,14 +38,14 @@
 				</div>
 
 				<div class="user-info">
-					<img class="cart" src="/images/icon-cart.svg" alt="cart" />
-					<img class="user-avatar" src="/images/image-avatar.png" alt="" />
+					<img class="cart cursor" src="/images/icon-cart.svg" alt="cart" />
+					<img class="user-avatar cursor" src="/images/image-avatar.png" alt="" />
 				</div>
 			</nav>
 		</header>
 
-		<main>
-			<div class="container product">
+		<main class="container">
+			<div class="product">
 				<!-- product image section -->
 				<section class="product-images">
 					<div class="product-img">
@@ -53,40 +53,92 @@
 					</div>
 					<div class="row">
 						<div class="column">
-							<img src="/images/image-product-1-thumbnail.jpg" onclick="openModal();currentSlide(1)" class="product-img-thumbnail" />
+							<img src="/images/image-product-1-thumbnail.jpg" onclick="currentSlide(1)" class="product-img-thumbnail active" />
 						</div>
 						<div class="column">
-							<img src="/images/image-product-2-thumbnail.jpg" onclick="openModal();currentSlide(2)" class="product-img-thumbnail active" />
+							<img src="/images/image-product-2-thumbnail.jpg" onclick="currentSlide(2)" class="product-img-thumbnail" />
 						</div>
 						<div class="column">
-							<img src="/images/image-product-3-thumbnail.jpg" onclick="openModal();currentSlide(3)" class="product-img-thumbnail" />
+							<img src="/images/image-product-3-thumbnail.jpg" onclick="currentSlide(3)" class="product-img-thumbnail" />
 						</div>
 						<div class="column">
-							<img src="/images/image-product-4-thumbnail.jpg" onclick="openModal();currentSlide(4)" class="product-img-thumbnail" />
+							<img src="/images/image-product-4-thumbnail.jpg" onclick="currentSlide(4)" class="product-img-thumbnail" />
 						</div>
 					</div>
+					<div class="prev cursor">
+						<a onclick="plusSlides(-1)">&#10094;</a>
+					</div>
+					<div class="next cursor">
+						<a onclick="plusSlides(1)">&#10095;</a>
+					</div>
 				</section>
+				<!-- lightbox -->
+				<div id="productModal" class="lightbox-container">
+					<span class="close cursor" onclick="closeModal()">&times;</span>
+					<div class="modal-content">
+						<div class="lightbox-image">
+							<div class="mySlides">
+								<img src="/images/image-product-1.jpg" />
+							</div>
+
+							<div class="mySlides">
+								<img src="/images/image-product-2.jpg" />
+							</div>
+
+							<div class="mySlides">
+								<img src="/images/image-product-3.jpg" />
+							</div>
+
+							<div class="mySlides">
+								<img src="/images/image-product-4.jpg" />
+							</div>
+							<div class="prev cursor">
+								<a onclick="plusSlides(-1)">&#10094;</a>
+							</div>
+							<div class="next cursor">
+								<a onclick="plusSlides(1)">&#10095;</a>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="column">
+								<img src="/images/image-product-1-thumbnail.jpg" onclick="currentSlide(1)" class="product-img-thumbnail active" />
+							</div>
+							<div class="column">
+								<img src="/images/image-product-2-thumbnail.jpg" onclick="currentSlide(2)" class="product-img-thumbnail" />
+							</div>
+							<div class="column">
+								<img src="/images/image-product-3-thumbnail.jpg" onclick="currentSlide(3)" class="product-img-thumbnail" />
+							</div>
+							<div class="column">
+								<img src="/images/image-product-4-thumbnail.jpg" onclick="currentSlide(4)" class="product-img-thumbnail" />
+							</div>
+						</div>
+					</div>
+				</div>
 				<!-- product description section -->
 				<section class="product-info">
 					<p class="company">Sneaker Company</p>
 					<h1 class="product-name">Fall Limited Edition Sneakers</h1>
 					<p class="product-description">These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.</p>
-					<p class="price">$125.00</p>
-					<p class="price-muted">$250.00</p>
+					<div class="price-container">
+						<p class="price">$125.00</p>
+						<p class="price-muted">$250.00</p>
+					</div>
 					<div class="add-to-cart">
 						<div class="item-number">
-							<button class="decrease-count">
+							<button class="cursor" id="decrease-count">
 								<img src="/images/icon-minus.svg" alt="" />
 							</button>
-							<span class="product-count">0</span>
-							<button class="increas-count">
+							<span id="product-count">0</span>
+							<button class="cursor" id="increas-count">
 								<img src="/images/icon-plus.svg" alt="" />
 							</button>
 						</div>
 
 						<button class="add-to-cart-btn">
-							<img src="/images/icon-cart.svg" alt="" />
-							<span>Add to cart</span>
+							<img src="/images/icon-cart-white.svg" alt="" />
+							<span>Add To Cart</span>
 						</button>
 					</div>
 				</section>
