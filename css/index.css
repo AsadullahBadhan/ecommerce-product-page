@@ -47,6 +47,7 @@ nav {
   position: relative;
   padding-inline: 1rem;
   border-bottom: 1px solid hsl(220, 14%, 75%);
+  z-index: 1000;
 }
 nav .logo {
   margin-left: 0;
@@ -69,6 +70,18 @@ nav .user-info .user-avatar {
 nav .user-info .user-avatar:hover {
   outline: 2px solid hsl(26, 100%, 50%);
   border-radius: 50%;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  opacity: 0.5;
+  display: none;
+  z-index: 10;
 }
 
 .cursor {

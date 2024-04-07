@@ -51,6 +51,7 @@ nav {
 	position: relative;
 	padding-inline: 1rem;
 	border-bottom: 1px solid $clr-grayish-blue;
+	z-index: 1000;
 
 	.nav-logo {
 		@extend %flex-box;
@@ -92,6 +93,18 @@ nav {
 	}
 }
 
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: black;
+	opacity: 0.5;
+	display: none;
+	z-index: 10;
+}
+
 .cursor {
 	cursor: pointer;
 }
@@ -101,7 +114,6 @@ nav {
 	display: none;
 	cursor: pointer;
 }
-
 //mobile devices
 @media screen and (max-width: 768px) {
 	nav {
