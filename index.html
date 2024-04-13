@@ -28,17 +28,22 @@
 							<img class="close-menu-btn" src="./images/icon-close.svg" alt="" />
 						</span>
 						<ul class="nav-items">
-							<li class="nav-item">Collections</li>
-							<li class="nav-item">Men</li>
-							<li class="nav-item">Women</li>
-							<li class="nav-item">About</li>
-							<li class="nav-item">Contact</li>
+							<li class="nav-link">Collections</li>
+							<li class="nav-link">Men</li>
+							<li class="nav-link">Women</li>
+							<li class="nav-link">About</li>
+							<li class="nav-link">Contact</li>
 						</ul>
 					</div>
 				</div>
 
 				<div class="user-info">
-					<img class="cart cursor" src="./images/icon-cart.svg" alt="cart" />
+					<div class="cart cursor" data-count="0">
+						<img src="./images/icon-cart.svg" alt="cart" />
+						<div class="cart-detail">
+							<p>Your cart is empty.</p>
+						</div>
+					</div>
 					<img class="user-avatar cursor" src="./images/image-avatar.png" alt="" />
 				</div>
 			</nav>
@@ -51,6 +56,12 @@
 				<section class="product-images">
 					<div class="product-img">
 						<img src="./images/image-product-1.jpg" alt="" />
+						<div class="prev cursor">
+							<a onclick="plusSlides(-1)">&#10094;</a>
+						</div>
+						<div class="next cursor">
+							<a onclick="plusSlides(1)">&#10095;</a>
+						</div>
 					</div>
 					<div class="row">
 						<div class="column">
@@ -66,17 +77,12 @@
 							<img src="./images/image-product-4-thumbnail.jpg" onclick="currentSlide(4)" class="product-img-thumbnail" />
 						</div>
 					</div>
-					<div class="prev cursor">
-						<a onclick="plusSlides(-1)">&#10094;</a>
-					</div>
-					<div class="next cursor">
-						<a onclick="plusSlides(1)">&#10095;</a>
-					</div>
 				</section>
+
 				<!-- lightbox -->
 				<div id="productModal" class="lightbox-container">
-					<span class="close cursor" onclick="closeModal()">&times;</span>
 					<div class="modal-content">
+						<span class="close-modal cursor" onclick="closeModal()">&times;</span>
 						<div class="lightbox-image">
 							<div class="mySlides">
 								<img src="./images/image-product-1.jpg" />
@@ -117,27 +123,28 @@
 						</div>
 					</div>
 				</div>
+
 				<!-- product description section -->
 				<section class="product-info">
 					<p class="company">Sneaker Company</p>
 					<h1 class="product-name">Fall Limited Edition Sneakers</h1>
 					<p class="product-description">These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.</p>
 					<div class="price-container">
-						<p class="price">$125.00</p>
+						<p class="price">$<span>125</span>.00</p>
 						<p class="price-muted">$250.00</p>
 					</div>
 					<div class="add-to-cart">
 						<div class="item-number">
-							<button class="decrease-count cursor">
+							<button class="cursor" onclick="updateCount(-1)">
 								<img src="./images/icon-minus.svg" alt="" />
 							</button>
 							<span id="product-count">0</span>
-							<button class="increase-count cursor">
+							<button class="cursor" onclick="updateCount(1)">
 								<img src="./images/icon-plus.svg" alt="" />
 							</button>
 						</div>
 
-						<button class="add-to-cart-btn">
+						<button class="btn add-to-cart-btn cursor">
 							<img src="./images/icon-cart-white.svg" alt="" />
 							<span>Add To Cart</span>
 						</button>

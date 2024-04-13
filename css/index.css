@@ -30,7 +30,7 @@ li {
   list-style: none;
 }
 
-.product-info .add-to-cart .add-to-cart-btn, .product-info .add-to-cart .item-number, .product-info .add-to-cart, .prev,
+.product-info .add-to-cart .item-number, .product-info .add-to-cart, .btn, .prev,
 .next, .row, .product-images, .product, nav .user-info, nav .nav-items, nav .nav-logo, nav {
   display: flex;
   align-items: center;
@@ -47,12 +47,11 @@ nav {
   position: relative;
   padding-inline: 1rem;
   border-bottom: 1px solid hsl(220, 14%, 75%);
-  z-index: 1000;
 }
 nav .logo {
   margin-left: 0;
 }
-nav .nav-items .nav-item {
+nav .nav-items .nav-link {
   color: hsl(219, 9%, 45%);
   align-self: center;
   margin-left: 2rem;
@@ -60,8 +59,41 @@ nav .nav-items .nav-item {
   height: 3rem;
   cursor: pointer;
 }
-nav .nav-items .nav-item:hover {
+nav .nav-items .nav-link:hover {
   border-bottom: 2px solid hsl(26, 100%, 50%);
+}
+nav .user-info .cart {
+  position: relative;
+}
+nav .user-info .cart-detail {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 4rem;
+  width: 20rem;
+  position: absolute;
+  top: 2rem;
+  right: 50%;
+  transform: translateX(50%);
+  background-color: hsl(0, 0%, 100%);
+  border-radius: 0.4rem;
+  box-shadow: 1px 2px 10px 2px rgba(0, 0, 0, 0.2);
+}
+nav .user-info .cart::after {
+  content: attr(data-count);
+  width: 1rem;
+  height: 1rem;
+  font-size: 0.8rem;
+  text-align: center;
+  border-radius: 50%;
+  background-color: hsl(26, 100%, 50%);
+  color: hsl(0, 0%, 100%);
+  font-weight: 700;
+  position: absolute;
+  right: -10px;
+  top: 0;
+  transform: translateY(-50%);
 }
 nav .user-info .user-avatar {
   width: 3rem;
@@ -81,7 +113,7 @@ nav .user-info .user-avatar:hover {
   background-color: black;
   opacity: 0.5;
   display: none;
-  z-index: 10;
+  z-index: 1;
 }
 
 .cursor {
@@ -94,58 +126,22 @@ nav .user-info .user-avatar:hover {
   cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
-  nav {
-    padding-block: 1rem;
-    border: none;
-  }
-  nav .logo {
-    margin-left: 1rem;
-  }
-  nav .nav-menu {
-    position: absolute;
-    background-color: hsl(0, 0%, 100%);
-    padding: 2rem 8rem 0 1.5rem;
-    height: 100vh;
-    top: 0;
-    left: -100%;
-    transition: left 0.5s;
-  }
-  nav .nav-menu .nav-items {
-    display: block;
-    margin-top: 2rem;
-    margin-left: 0;
-  }
-  nav .nav-menu .nav-items .nav-item {
-    margin-bottom: 1rem;
-    margin-left: 0;
-    font-weight: 700;
-    cursor: pointer;
-  }
-  nav .nav-menu .nav-items .nav-item:hover {
-    color: hsl(26, 100%, 50%);
-  }
-  nav .nav-menu.active {
-    left: 0;
-  }
-  nav .hamburger,
-  nav .close-menu-btn {
-    display: block;
-  }
-}
 .product {
   margin-top: 2rem;
 }
 .product > * {
   flex: 1;
-  padding-inline: 4rem;
 }
 
 .product-images {
   flex-direction: column;
 }
+.product-images .product-img {
+  position: relative;
+}
 .product-images .prev,
 .product-images .next {
+  position: absolute;
   display: none;
   top: 40%;
 }
@@ -192,24 +188,22 @@ nav .user-info .user-avatar:hover {
   margin: auto;
   padding: 0;
   width: 30rem;
+  /* The Close Button */
 }
 .lightbox-container .modal-content img {
   border-radius: 1rem;
   width: 100%;
 }
-
-/* The Close Button */
-.close {
+.lightbox-container .modal-content .close-modal {
   color: hsl(0, 0%, 100%);
   position: absolute;
-  top: 5%;
-  right: 35%;
+  top: -4.5rem;
+  right: 0;
   font-size: 3rem;
   font-weight: bold;
+  z-index: 2;
 }
-
-.close:hover,
-.close:focus {
+.lightbox-container .modal-content .close-modal:hover, .lightbox-container .modal-content .close-modal:focus {
   color: hsl(26, 100%, 50%);
   text-decoration: none;
   cursor: pointer;
@@ -253,19 +247,33 @@ nav .user-info .user-avatar:hover {
   color: hsl(26, 100%, 50%);
 }
 
+.btn {
+  justify-content: center;
+  padding: 0.8rem 1.2rem;
+  background-color: hsl(26, 100%, 50%);
+  border-radius: 0.6rem;
+  color: hsl(0, 0%, 100%);
+  font-weight: 700;
+}
+
+.product-info {
+  max-width: 30rem;
+  padding-inline: 2rem;
+}
 .product-info .company {
   color: hsl(26, 100%, 50%);
   font-weight: 700;
   text-transform: uppercase;
 }
 .product-info .product-name {
-  font-size: 3rem;
+  font-size: clamp(2rem, 5vw, 2.5rem);
   color: hsl(220, 13%, 13%);
   margin-block: 1rem;
 }
 .product-info .product-description {
   color: hsl(219, 9%, 45%);
   margin-block: 1rem;
+  font-size: clamp(1rem, 1vw, 1.25rem);
 }
 .product-info .price-container {
   margin-block: 2rem;
@@ -301,23 +309,56 @@ nav .user-info .user-avatar:hover {
   border-radius: 0.6rem;
 }
 .product-info .add-to-cart .add-to-cart-btn {
-  justify-content: center;
   flex-grow: 1;
-  padding: 0.8rem 0.5rem;
-  background-color: hsl(26, 100%, 50%);
   margin-left: 1rem;
-  border-radius: 0.6rem;
 }
 .product-info .add-to-cart .add-to-cart-btn span {
-  color: hsl(0, 0%, 100%);
-  font-weight: 700;
   margin-left: 1.2rem;
 }
 .product-info .add-to-cart .add-to-cart-btn img {
   width: 1rem;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
+  nav {
+    padding-block: 1rem;
+    border: none;
+  }
+  nav .logo {
+    margin-left: 1rem;
+  }
+  nav .nav-menu {
+    position: absolute;
+    background-color: hsl(0, 0%, 100%);
+    padding: 2rem 8rem 0 1.5rem;
+    height: 100vh;
+    top: 0;
+    left: -100%;
+    transition: left 0.5s;
+    z-index: 2;
+  }
+  nav .nav-menu .nav-items {
+    display: block;
+    margin-top: 2rem;
+    margin-left: 0;
+  }
+  nav .nav-menu .nav-items .nav-link {
+    height: 100%;
+    margin: 1.5rem 0 0 0;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  nav .nav-menu .nav-items .nav-link:hover {
+    color: hsl(26, 100%, 50%);
+    border: none;
+  }
+  nav .nav-menu.active {
+    left: 0;
+  }
+  nav .hamburger,
+  nav .close-menu-btn {
+    display: block;
+  }
   .container {
     padding: 0;
   }
@@ -325,9 +366,6 @@ nav .user-info .user-avatar:hover {
     flex-direction: column;
     gap: 2rem;
     margin-top: 0;
-  }
-  .product > * {
-    padding-inline: 0;
   }
   .product img {
     border-radius: 0 !important;
@@ -341,9 +379,6 @@ nav .user-info .user-avatar:hover {
   }
   .product-info {
     padding-inline: 2rem;
-  }
-  .product-info .product-name {
-    font-size: 2rem;
   }
   .product-info .price-container {
     display: flex;

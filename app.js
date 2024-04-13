@@ -41,7 +41,7 @@ function plusSlides(n) {
 
 function currentSlide(n) {
   showSlides(slideIndex = n);
-  productImage.src = `/images/image-product-${n}.jpg`;
+
 }
 
 function showSlides(n) {
@@ -55,37 +55,47 @@ function showSlides(n) {
     slides[i].style.display = "none";
   }
   slides[slideIndex - 1].style.display = "block";
+  productImage.src = `./images/image-product-${slideIndex}.jpg`;
 }
 
 //add item to cart//
-// TODO: increase item count
-const increaseCountBtn = document.querySelector('.increase-count');
-const decreaseCountBtn = document.querySelector('.decrease-count');
+const price = parseInt(document.querySelector('.price span').textContent);
 const productCount = document.querySelector('#product-count');
-
-increaseCountBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  increaseCount();
-});
-decreaseCountBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  decreaseCount();
-});
-
-function increaseCount() {
-  productCount.textContent = parseInt(productCount.textContent) + 1;
-}
-
-function decreaseCount() {
-  productCount.textContent = parseInt(productCount.textContent) - 1;
-}
-
+let productCountNum = parseInt(productCount.textContent);
+const cartElement = document.querySelector('.cart');
+const cartDetail = document.querySelector('.cart-detail');
 const addToCartBtn = document.querySelector('.add-to-cart-btn');
-const cart = document.querySelector('.cart');
+
+function updateCount(n) {
+  productCountNum += n;
+  if (productCountNum < 0) productCountNum = 0;
+
+  productCount.textContent = productCountNum;
+}
 
 addToCartBtn.addEventListener('click', (e) => {
-  e.preventDefault();
   addToCart();
 });
 
-function addToCart() { }
+function addToCart() {
+  const totalPrice = price * productCountNum;
+
+  cartDetail.innerHTML = `
+    <p>Cart</p>
+    <hr />
+    <div class="card-content">
+      <img src="./images/image-product-1-thumbnail.jpg" alt="shoe image" />
+      <div class="card-info">
+        <p class="card-title">Fall Limited Edition Sneakers</p>
+        <p>$125.00 x ${productCountNum} $${totalPrice}</p>
+      </div>
+      <button class="btn">Checkout</button>
+    </div>
+  `;
+
+  cartElement.setAttribute('data-count', productCount.textContent);
+}
+
+cartElement.addEventListener('click', () => {
+  cartDetail.style.display = 'flex';
+})
